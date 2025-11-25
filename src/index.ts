@@ -4,6 +4,7 @@ import { config } from './config/environment';
 import { logger } from './utils/logger';
 import authRoutes from './api/auth/auth.routes';
 import webhookRoutes from './api/webhooks/webhook.routes';
+import questRoutes from './api/quests/quest.routes';
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.get('/', (_req, res) => {
 // API Routes
 app.use('/api', authRoutes);
 app.use('/api', webhookRoutes);
+app.use('/api', questRoutes);
 
 // 404 handler
 app.use((_req, res) => {
