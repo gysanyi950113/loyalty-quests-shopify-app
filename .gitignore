@@ -76,3 +76,7 @@ prisma/migrations/
 # MCP Server node_modules (these are installed separately)
 .claude/subagents/*/node_modules/
 .claude/mcp/*/node_modules/
+
+# Frontend
+web/node_modules/
+web/dist/
