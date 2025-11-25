@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "dev:frontend": "cd web && npm run dev",
-    "build": "tsc && cd web && npm run build",
+    "build": "prisma generate && tsc && cd web && npm install && npm run build",
     "build:backend": "tsc",
     "build:frontend": "cd web && npm run build",
     "start": "node dist/index.js",
@@ -20,6 +20,7 @@
     "test:coverage": "jest --coverage",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "verify": "node scripts/verify-setup.js"
   },
@@ -41,7 +42,6 @@
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "@shopify/shopify-api": "^11.6.0",
-    "@shopify/shopify-app-express": "^3.2.0",
     "bullmq": "^5.28.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

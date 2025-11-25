@@ -7,7 +7,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -16,10 +16,12 @@ COPY . .
 RUN npx prisma generate
 
 # Build TypeScript
-RUN npm run build
+RUN npm run build:backend
 
 # Build frontend
-RUN npm run build:frontend
+WORKDIR /app/web
+RUN npm install
+RUN npm run build
 
 # Production stage
 FROM node:20-alpine
@@ -30,13 +32,15 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install production dependencies only
-RUN npm ci --only=production
+# Install production dependencies
+RUN npm install --omit=dev
+
+# Generate Prisma client in production
+RUN npx prisma generate
 
 # Copy built files from builder
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/web/dist ./dist/web
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/web/dist ./web/dist
 
 # Expose port
 EXPOSE 3000
