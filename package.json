@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Loyalty Quests - A Shopify app that increases repeat purchases through gamified quest-based rewards",
   "main": "dist/index.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",
