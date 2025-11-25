@@ -7,6 +7,7 @@ import webhookRoutes from './api/webhooks/webhook.routes';
 import questRoutes from './api/quests/quest.routes';
 import rewardRoutes from './api/rewards/reward.routes';
 import publicRoutes from './api/public/public.routes';
+import analyticsRoutes from './api/analytics/analytics.routes';
 import { startWorkers, stopWorkers } from './workers';
 
 const app = express();
@@ -47,6 +48,7 @@ app.use('/api', authRoutes);
 app.use('/api', webhookRoutes);
 app.use('/api', questRoutes);
 app.use('/api', rewardRoutes);
+app.use('/api', analyticsRoutes);
 app.use('/', publicRoutes); // Public routes (no /api prefix)
 
 // 404 handler
