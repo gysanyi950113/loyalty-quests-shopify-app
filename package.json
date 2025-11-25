@@ -1,0 +1,30 @@
+{
+  "name": "loyalty-quests-dev-environment",
+  "version": "1.0.0",
+  "description": "Claude Code development environment for Loyalty Quests Shopify app with 11 specialized subagents",
+  "private": true,
+  "scripts": {
+    "verify": "node scripts/verify-setup.js",
+    "postinstall": "echo Run 'npm run verify' to check your setup"
+  },
+  "keywords": [
+    "shopify",
+    "loyalty",
+    "quests",
+    "gamification",
+    "claude-code",
+    "mcp",
+    "subagents"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/loyalty-quests"
+  }
+}
