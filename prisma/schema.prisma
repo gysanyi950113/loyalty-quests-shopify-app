@@ -1,0 +1,225 @@
+// Loyalty Quests - Prisma Schema
+// Multi-tenant Shopify app for gamified loyalty quests
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// SHOP MANAGEMENT
+// ============================================================================
+
+model Shop {
+  id            String   @id @default(uuid())
+  shopDomain    String   @unique
+  accessToken   String   // Encrypted at application level
+  scope         String
+  status        ShopStatus @default(ACTIVE)
+  billingPlan   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  quests                Quest[]
+  customerQuestProgress CustomerQuestProgress[]
+  rewardRedemptions     RewardRedemption[]
+  questAnalyticsDaily   QuestAnalyticsDaily[]
+
+  @@index([shopDomain])
+  @@index([status])
+  @@map("shops")
+}
+
+enum ShopStatus {
+  ACTIVE
+  TRIAL
+  UNINSTALLED
+  SUSPENDED
+}
+
+// ============================================================================
+// QUEST SYSTEM
+// ============================================================================
+
+model Quest {
+  id          String   @id @default(uuid())
+  shopId      String
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  shop        Shop              @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  conditions  QuestCondition[]
+  rewards     QuestReward[]
+  progress    CustomerQuestProgress[]
+  analytics   QuestAnalyticsDaily[]
+
+  @@index([shopId])
+  @@index([shopId, isActive])
+  @@index([shopId, startDate, endDate])
+  @@map("quests")
+}
+
+model QuestCondition {
+  id        String   @id @default(uuid())
+  questId   String
+  type      QuestConditionType
+  config    Json     // Flexible configuration for different condition types
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  quest     Quest    @relation(fields: [questId], references: [id], onDelete: Cascade)
+
+  @@index([questId])
+  @@index([type])
+  @@map("quest_conditions")
+}
+
+enum QuestConditionType {
+  ORDER_COUNT       // Number of orders
+  TOTAL_SPEND       // Total spending amount
+  PRODUCT_CATEGORY  // Purchase from specific category
+  PRODUCT_SPECIFIC  // Purchase specific products
+  TIME_WINDOW       // Complete within time period
+}
+
+model QuestReward {
+  id        String   @id @default(uuid())
+  questId   String
+  type      QuestRewardType
+  config    Json     // Flexible configuration for different reward types
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  quest       Quest              @relation(fields: [questId], references: [id], onDelete: Cascade)
+  redemptions RewardRedemption[]
+
+  @@index([questId])
+  @@index([type])
+  @@map("quest_rewards")
+}
+
+enum QuestRewardType {
+  DISCOUNT_PERCENTAGE  // Percentage off discount
+  DISCOUNT_FIXED       // Fixed amount off
+  FREE_SHIPPING        // Free shipping code
+  CUSTOM               // Custom reward type
+}
+
+// ============================================================================
+// CUSTOMER PROGRESS TRACKING
+// ============================================================================
+
+model CustomerQuestProgress {
+  id                 String   @id @default(uuid())
+  shopId             String
+  questId            String
+  shopifyCustomerId  String
+  status             QuestProgressStatus @default(NOT_STARTED)
+  currentValue       Float    @default(0)
+  targetValue        Float
+  lastUpdatedAt      DateTime @default(now())
+  rewardId           String?
+  completedAt        DateTime?
+
+  // Relations
+  shop               Shop    @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  quest              Quest   @relation(fields: [questId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, questId, shopifyCustomerId])
+  @@index([shopId, shopifyCustomerId])
+  @@index([shopId, questId, status])
+  @@index([status])
+  @@map("customer_quest_progress")
+}
+
+enum QuestProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  REWARDED
+  EXPIRED
+}
+
+// ============================================================================
+// REWARD REDEMPTIONS
+// ============================================================================
+
+model RewardRedemption {
+  id                String    @id @default(uuid())
+  shopId            String
+  questId           String
+  rewardId          String
+  shopifyCustomerId String
+  discountCode      String?
+  issuedAt          DateTime  @default(now())
+  redeemedOrderId   String?
+  redeemedAt        DateTime?
+  expiresAt         DateTime?
+
+  // Relations
+  shop              Shop        @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  reward            QuestReward @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, shopifyCustomerId])
+  @@index([shopId, questId])
+  @@index([discountCode])
+  @@index([redeemedAt])
+  @@map("reward_redemptions")
+}
+
+// ============================================================================
+// ANALYTICS
+// ============================================================================
+
+model QuestAnalyticsDaily {
+  id                   String   @id @default(uuid())
+  questId              String
+  shopId               String
+  date                 DateTime @db.Date
+  participantsCount    Int      @default(0)
+  completedCount       Int      @default(0)
+  revenueFromQuests    Float    @default(0)
+  avgCompletionTime    Float?   // In hours
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  // Relations
+  quest                Quest    @relation(fields: [questId], references: [id], onDelete: Cascade)
+  shop                 Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([questId, date])
+  @@index([shopId, date])
+  @@index([questId, date])
+  @@map("quest_analytics_daily")
+}
+
+// ============================================================================
+// WEBHOOK LOGS (Optional - for debugging)
+// ============================================================================
+
+model WebhookLog {
+  id               String   @id @default(uuid())
+  shopDomain       String
+  topic            String
+  payload          Json
+  processedAt      DateTime @default(now())
+  success          Boolean
+  errorMessage     String?
+
+  @@index([shopDomain, processedAt])
+  @@index([topic, processedAt])
+  @@map("webhook_logs")
+}
