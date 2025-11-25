@@ -7,6 +7,7 @@ import webhookRoutes from './api/webhooks/webhook.routes';
 import questRoutes from './api/quests/quest.routes';
 import rewardRoutes from './api/rewards/reward.routes';
 import publicRoutes from './api/public/public.routes';
+import { startWorkers, stopWorkers } from './workers';
 
 const app = express();
 
@@ -71,19 +72,26 @@ const server = app.listen(config.app.port, config.app.host, () => {
   logger.info(`🚀 Loyalty Quests server running on http://${config.app.host}:${config.app.port}`);
   logger.info(`📊 Environment: ${config.app.environment}`);
   logger.info(`✨ Features enabled:`, config.features);
+
+  // Start BullMQ workers
+  if (config.features.webhookAutomation) {
+    startWorkers();
+  }
 });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
   logger.info('SIGTERM signal received: closing HTTP server');
+  await stopWorkers();
   server.close(() => {
     logger.info('HTTP server closed');
     process.exit(0);
   });
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   logger.info('SIGINT signal received: closing HTTP server');
+  await stopWorkers();
   server.close(() => {
     logger.info('HTTP server closed');
     process.exit(0);

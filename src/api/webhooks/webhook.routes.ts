@@ -3,6 +3,8 @@ import { webhookService } from '../../services/shopify/webhook.service';
 import { shopService } from '../../services/shopify/shop.service';
 import { logger } from '../../utils/logger';
 import { prisma } from '../../utils/prisma';
+import { queueManager } from '../../config/queue/queue-manager';
+import { QueueNames } from '../../config/queue/connection';
 
 const router = Router();
 
@@ -109,8 +111,23 @@ router.post('/webhooks/orders/create', verifyWebhook, async (req: Request, res: 
       orderNumber: req.body.order_number,
     });
 
-    // TODO: Trigger quest progress evaluation
-    // This will be handled by BullMQ worker in next phase
+    // Get shop from database to get shopId
+    const shopData = await shopService.getShopByDomain(shop);
+    if (!shopData) {
+      throw new Error('Shop not found');
+    }
+
+    // Enqueue order processing job
+    const orderQueue = queueManager.getQueue(QueueNames.ORDER_PROCESSING);
+    await orderQueue.add('process-order', {
+      shopId: shopData.id,
+      order: req.body,
+    });
+
+    logger.info('Order enqueued for processing', {
+      shop,
+      orderId: req.body.id,
+    });
 
     await logWebhook(shop, topic, req.body, true);
 
@@ -140,8 +157,23 @@ router.post('/webhooks/orders/paid', verifyWebhook, async (req: Request, res: Re
       totalPrice: req.body.total_price,
     });
 
-    // TODO: Trigger quest progress evaluation and reward issuance
-    // This will be handled by BullMQ worker in next phase
+    // Get shop from database to get shopId
+    const shopData = await shopService.getShopByDomain(shop);
+    if (!shopData) {
+      throw new Error('Shop not found');
+    }
+
+    // Enqueue order processing job
+    const orderQueue = queueManager.getQueue(QueueNames.ORDER_PROCESSING);
+    await orderQueue.add('process-order', {
+      shopId: shopData.id,
+      order: req.body,
+    });
+
+    logger.info('Paid order enqueued for processing', {
+      shop,
+      orderId: req.body.id,
+    });
 
     await logWebhook(shop, topic, req.body, true);
 
