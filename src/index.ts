@@ -2,6 +2,8 @@ import express from 'express';
 import helmet from 'helmet';
 import { config } from './config/environment';
 import { logger } from './utils/logger';
+import authRoutes from './api/auth/auth.routes';
+import webhookRoutes from './api/webhooks/webhook.routes';
 
 const app = express();
 
@@ -9,6 +11,10 @@ const app = express();
 app.use(helmet());
 
 // Body parsing middleware
+// Note: Webhooks need raw body for HMAC verification
+app.use('/api/webhooks', express.json({ verify: (req: any, _res, buf) => {
+  req.rawBody = buf.toString();
+}}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,6 +37,10 @@ app.get('/', (_req, res) => {
     documentation: 'https://github.com/gysanyi950113/loyalty-quests-shopify-app',
   });
 });
+
+// API Routes
+app.use('/api', authRoutes);
+app.use('/api', webhookRoutes);
 
 // 404 handler
 app.use((_req, res) => {
