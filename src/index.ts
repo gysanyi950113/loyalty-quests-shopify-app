@@ -5,6 +5,8 @@ import { logger } from './utils/logger';
 import authRoutes from './api/auth/auth.routes';
 import webhookRoutes from './api/webhooks/webhook.routes';
 import questRoutes from './api/quests/quest.routes';
+import rewardRoutes from './api/rewards/reward.routes';
+import publicRoutes from './api/public/public.routes';
 
 const app = express();
 
@@ -43,6 +45,8 @@ app.get('/', (_req, res) => {
 app.use('/api', authRoutes);
 app.use('/api', webhookRoutes);
 app.use('/api', questRoutes);
+app.use('/api', rewardRoutes);
+app.use('/', publicRoutes); // Public routes (no /api prefix)
 
 // 404 handler
 app.use((_req, res) => {
