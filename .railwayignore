@@ -8,6 +8,5 @@ node_modules
 *.log
 coverage
 .nyc_output
-dist
-web/dist
 web/node_modules
+Dockerfile.backup
