@@ -1,0 +1,3 @@
+This build includes TypeScript fixes committed on 2025-11-26
+Git commit should be: b2ce624 or later
+All TypeScript errors have been resolved
