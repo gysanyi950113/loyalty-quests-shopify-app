@@ -2,6 +2,7 @@ import { DeliveryMethod } from '@shopify/shopify-api';
 import { shopify } from './client';
 import { logger } from '../../utils/logger';
 import { config } from '../../config/environment';
+import { Session } from '@shopify/shopify-api';
 
 export enum WebhookTopic {
   APP_UNINSTALLED = 'APP_UNINSTALLED',
@@ -62,19 +63,19 @@ export class WebhookService {
       const webhookPath = `/api/webhooks/${topic.toLowerCase().replace('_', '/')}`;
       const callbackUrl = `${config.app.url}${webhookPath}`;
 
-      const response = await shopify.webhooks.register({
-        session: {
-          id: shop,
-          shop,
-          state: 'active',
-          isOnline: false,
-          accessToken,
-          scope: config.shopify.scopes.join(','),
-        },
-        topic,
-        deliveryMethod: DeliveryMethod.Http,
-        path: webhookPath,
+      const session = new Session({
+        id: shop,
+        shop,
+        state: 'active',
+        isOnline: false,
+        accessToken,
+        scope: config.shopify.scopes.join(','),
       });
+      const response = await shopify.webhooks.register({
+        session,
+        deliveryMethod: DeliveryMethod.Http,
+        callbackUrl,
+      } as any);
 
       if (response.success) {
         logger.info('Webhook registered successfully', {
@@ -104,12 +105,13 @@ export class WebhookService {
   /**
    * Verify webhook HMAC signature
    */
-  verifyWebhook(rawBody: string, hmacHeader: string): boolean {
+  async verifyWebhook(rawBody: string, hmacHeader: string): Promise<boolean> {
     try {
-      return shopify.webhooks.validate({
+      const result = await shopify.webhooks.validate({
         rawBody: Buffer.from(rawBody),
-        rawHeader: hmacHeader,
-      });
+        rawRequest: hmacHeader,
+      } as any);
+      return result !== undefined;
     } catch (error) {
       logger.error('Webhook verification failed', {
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -121,7 +123,7 @@ export class WebhookService {
   /**
    * Unregister all webhooks for a shop (cleanup on uninstall)
    */
-  async unregisterWebhooks(shop: string, accessToken: string) {
+  async unregisterWebhooks(shop: string, _accessToken: string) {
     try {
       // Shopify automatically removes webhooks when app is uninstalled
       // This method is here for manual cleanup if needed

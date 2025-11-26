@@ -1,4 +1,4 @@
-import { Shopify, ApiVersion, shopifyApi } from '@shopify/shopify-api';
+import { ApiVersion, shopifyApi, Session } from '@shopify/shopify-api';
 import '@shopify/shopify-api/adapters/node';
 import { config } from '../../config/environment';
 import { logger } from '../../utils/logger';
@@ -38,32 +38,30 @@ export const shopify = shopifyApi({
  * Create a Shopify REST client for a specific shop
  */
 export function createShopifyClient(shop: string, accessToken: string) {
-  return new shopify.clients.Rest({
-    session: {
-      id: shop,
-      shop,
-      state: 'active',
-      isOnline: false,
-      accessToken,
-      scope: config.shopify.scopes.join(','),
-    },
+  const session = new Session({
+    id: shop,
+    shop,
+    state: 'active',
+    isOnline: false,
+    accessToken,
+    scope: config.shopify.scopes.join(','),
   });
+  return new shopify.clients.Rest({ session });
 }
 
 /**
  * Create a Shopify GraphQL client for a specific shop
  */
 export function createShopifyGraphQLClient(shop: string, accessToken: string) {
-  return new shopify.clients.Graphql({
-    session: {
-      id: shop,
-      shop,
-      state: 'active',
-      isOnline: false,
-      accessToken,
-      scope: config.shopify.scopes.join(','),
-    },
+  const session = new Session({
+    id: shop,
+    shop,
+    state: 'active',
+    isOnline: false,
+    accessToken,
+    scope: config.shopify.scopes.join(','),
   });
+  return new shopify.clients.Graphql({ session });
 }
 
 export type ShopifyRestClient = ReturnType<typeof createShopifyClient>;

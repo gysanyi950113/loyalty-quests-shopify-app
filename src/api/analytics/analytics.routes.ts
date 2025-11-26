@@ -32,7 +32,7 @@ const router = Router();
 router.get(
   '/analytics/overview',
   authenticateShop,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response): Promise<any> => {
     try {
       const shopId = req.shop!.id;
 
@@ -72,7 +72,7 @@ router.get(
 router.get(
   '/analytics/quests',
   authenticateShop,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response): Promise<any> => {
     try {
       const shopId = req.shop!.id;
 
@@ -111,7 +111,7 @@ router.get(
 router.get(
   '/analytics/quests/:questId',
   authenticateShop,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response): Promise<any> => {
     try {
       const shopId = req.shop!.id;
       const { questId } = req.params;
@@ -134,7 +134,7 @@ router.get(
         shop: req.shop?.shopDomain,
         questId: req.params.questId,
       });
-      res.status(500).json({
+      return res.status(500).json({
         error: 'Failed to retrieve quest analytics',
         message: error instanceof Error ? error.message : 'Unknown error',
       });
@@ -161,7 +161,7 @@ router.get(
 router.get(
   '/analytics/customers',
   authenticateShop,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response): Promise<any> => {
     try {
       const shopId = req.shop!.id;
 
@@ -200,7 +200,7 @@ router.get(
 router.get(
   '/analytics/revenue',
   authenticateShop,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response): Promise<any> => {
     try {
       const shopId = req.shop!.id;
 

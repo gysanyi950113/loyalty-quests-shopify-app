@@ -11,7 +11,7 @@ const router = Router();
 /**
  * Middleware to verify webhook HMAC
  */
-async function verifyWebhook(req: Request, res: Response, next: NextFunction) {
+async function verifyWebhook(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const hmac = req.get('X-Shopify-Hmac-SHA256');
     const shop = req.get('X-Shopify-Shop-Domain');
@@ -21,16 +21,18 @@ async function verifyWebhook(req: Request, res: Response, next: NextFunction) {
         hasHmac: !!hmac,
         hasShop: !!shop,
       });
-      return res.status(401).json({ error: 'Unauthorized' });
+      res.status(401).json({ error: 'Unauthorized' });
+      return;
     }
 
     // Get raw body for HMAC verification
     const rawBody = JSON.stringify(req.body);
-    const isValid = webhookService.verifyWebhook(rawBody, hmac);
+    const isValid = await webhookService.verifyWebhook(rawBody, hmac);
 
     if (!isValid) {
       logger.warn('Webhook HMAC verification failed', { shop });
-      return res.status(401).json({ error: 'Invalid HMAC signature' });
+      res.status(401).json({ error: 'Invalid HMAC signature' });
+      return;
     }
 
     // Attach shop to request for handlers
@@ -75,7 +77,7 @@ async function logWebhook(
 /**
  * APP_UNINSTALLED webhook
  */
-router.post('/webhooks/app/uninstalled', verifyWebhook, async (req: Request, res: Response) => {
+router.post('/webhooks/app/uninstalled', verifyWebhook, async (req: Request, res: Response): Promise<any> => {
   const shop = (req as any).shopDomain as string;
   const topic = 'APP_UNINSTALLED';
 
@@ -86,21 +88,21 @@ router.post('/webhooks/app/uninstalled', verifyWebhook, async (req: Request, res
 
     await logWebhook(shop, topic, req.body, true);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     logger.error('Failed to handle app uninstalled webhook', { shop, error: errorMessage });
 
     await logWebhook(shop, topic, req.body, false, errorMessage);
 
-    res.status(500).json({ error: 'Webhook processing failed' });
+    return res.status(500).json({ error: 'Webhook processing failed' });
   }
 });
 
 /**
  * ORDERS_CREATE webhook
  */
-router.post('/webhooks/orders/create', verifyWebhook, async (req: Request, res: Response) => {
+router.post('/webhooks/orders/create', verifyWebhook, async (req: Request, res: Response): Promise<any> => {
   const shop = (req as any).shopDomain as string;
   const topic = 'ORDERS_CREATE';
 
@@ -131,21 +133,21 @@ router.post('/webhooks/orders/create', verifyWebhook, async (req: Request, res: 
 
     await logWebhook(shop, topic, req.body, true);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     logger.error('Failed to handle order created webhook', { shop, error: errorMessage });
 
     await logWebhook(shop, topic, req.body, false, errorMessage);
 
-    res.status(500).json({ error: 'Webhook processing failed' });
+    return res.status(500).json({ error: 'Webhook processing failed' });
   }
 });
 
 /**
  * ORDERS_PAID webhook
  */
-router.post('/webhooks/orders/paid', verifyWebhook, async (req: Request, res: Response) => {
+router.post('/webhooks/orders/paid', verifyWebhook, async (req: Request, res: Response): Promise<any> => {
   const shop = (req as any).shopDomain as string;
   const topic = 'ORDERS_PAID';
 
@@ -177,21 +179,21 @@ router.post('/webhooks/orders/paid', verifyWebhook, async (req: Request, res: Re
 
     await logWebhook(shop, topic, req.body, true);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     logger.error('Failed to handle order paid webhook', { shop, error: errorMessage });
 
     await logWebhook(shop, topic, req.body, false, errorMessage);
 
-    res.status(500).json({ error: 'Webhook processing failed' });
+    return res.status(500).json({ error: 'Webhook processing failed' });
   }
 });
 
 /**
  * ORDERS_UPDATED webhook
  */
-router.post('/webhooks/orders/updated', verifyWebhook, async (req: Request, res: Response) => {
+router.post('/webhooks/orders/updated', verifyWebhook, async (req: Request, res: Response): Promise<any> => {
   const shop = (req as any).shopDomain as string;
   const topic = 'ORDERS_UPDATED';
 
@@ -206,14 +208,14 @@ router.post('/webhooks/orders/updated', verifyWebhook, async (req: Request, res:
 
     await logWebhook(shop, topic, req.body, true);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     logger.error('Failed to handle order updated webhook', { shop, error: errorMessage });
 
     await logWebhook(shop, topic, req.body, false, errorMessage);
 
-    res.status(500).json({ error: 'Webhook processing failed' });
+    return res.status(500).json({ error: 'Webhook processing failed' });
   }
 });
 

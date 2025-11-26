@@ -323,7 +323,7 @@ export class AnalyticsService {
             const percentage = config.percentage || 0;
             const maxAmount = config.maximumAmount || percentage;
             estimatedDiscountValue += Math.min((100 * percentage) / 100, maxAmount);
-          } else if (rewardType === 'DISCOUNT_FIXED_AMOUNT') {
+          } else if (rewardType === 'DISCOUNT_FIXED') {
             estimatedDiscountValue += config.amount || 0;
           } else if (rewardType === 'FREE_SHIPPING') {
             // Assume average shipping cost of $10

@@ -12,7 +12,7 @@ router.use(authenticateShop, requireActiveShop);
  * GET /api/rewards/customer/:customerId
  * Get all rewards for a specific customer
  */
-router.get('/rewards/customer/:customerId', async (req: Request, res: Response) => {
+router.get('/rewards/customer/:customerId', async (req: Request, res: Response): Promise<any> => {
   try {
     const { customerId } = req.params;
     const shopId = req.shop!.id;
@@ -30,7 +30,7 @@ router.get('/rewards/customer/:customerId', async (req: Request, res: Response) 
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve customer rewards',
     });
   }
@@ -40,7 +40,7 @@ router.get('/rewards/customer/:customerId', async (req: Request, res: Response) 
  * POST /api/rewards/issue
  * Manually issue a reward to a customer
  */
-router.post('/rewards/issue', async (req: Request, res: Response) => {
+router.post('/rewards/issue', async (req: Request, res: Response): Promise<any> => {
   try {
     const { questId, rewardId, customerId } = req.body;
 
@@ -70,7 +70,7 @@ router.post('/rewards/issue', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to issue reward',
       message: error instanceof Error ? error.message : 'Unknown error',
     });
@@ -81,7 +81,7 @@ router.post('/rewards/issue', async (req: Request, res: Response) => {
  * GET /api/rewards/quest/:questId/stats
  * Get reward statistics for a quest
  */
-router.get('/rewards/quest/:questId/stats', async (req: Request, res: Response) => {
+router.get('/rewards/quest/:questId/stats', async (req: Request, res: Response): Promise<any> => {
   try {
     const { questId } = req.params;
 
@@ -97,7 +97,7 @@ router.get('/rewards/quest/:questId/stats', async (req: Request, res: Response) 
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve reward statistics',
     });
   }
@@ -107,7 +107,7 @@ router.get('/rewards/quest/:questId/stats', async (req: Request, res: Response) 
  * POST /api/rewards/redeem
  * Mark a reward as redeemed (called internally after order creation)
  */
-router.post('/rewards/redeem', async (req: Request, res: Response) => {
+router.post('/rewards/redeem', async (req: Request, res: Response): Promise<any> => {
   try {
     const { discountCode, orderId } = req.body;
 
@@ -131,7 +131,7 @@ router.post('/rewards/redeem', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to mark reward as redeemed',
     });
   }

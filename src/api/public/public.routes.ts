@@ -11,7 +11,7 @@ const router = Router();
  * Get active quests and customer progress for storefront widget
  * Query params: shop (required), customerId (optional)
  */
-router.get('/public/quests', optionalShopAuth, async (req: Request, res: Response) => {
+router.get('/public/quests', optionalShopAuth, async (req: Request, res: Response): Promise<any> => {
   try {
     const shopDomain = req.query.shop as string;
     const customerId = req.query.customerId as string;
@@ -34,8 +34,8 @@ router.get('/public/quests', optionalShopAuth, async (req: Request, res: Respons
     const quests = await questService.getActiveQuestsByShop(shop.id);
 
     // If customer ID provided, include their progress
-    let customerProgress = [];
-    let customerRewards = [];
+    let customerProgress: any[] = [];
+    let customerRewards: any[] = [];
 
     if (customerId) {
       customerProgress = await questService.getCustomerProgress(shop.id, customerId);
@@ -53,17 +53,17 @@ router.get('/public/quests', optionalShopAuth, async (req: Request, res: Respons
       })),
       rewards: quest.rewards.map(r => ({
         type: r.type,
-        description: this.formatRewardDescription(r.type, r.config as any),
+        description: formatRewardDescription(r.type, r.config as any),
       })),
       progress: customerProgress.find(p => p.questId === quest.id) || null,
     }));
 
-    res.json({
+    return res.json({
       shop: shopDomain,
       customerId: customerId || null,
       quests: publicQuests,
       rewards: customerRewards.map(r => ({
-        questName: r.reward.quest.name,
+        questName: r.reward?.quest?.name || 'Unknown Quest',
         discountCode: r.discountCode,
         issuedAt: r.issuedAt,
         expiresAt: r.expiresAt,
@@ -77,7 +77,7 @@ router.get('/public/quests', optionalShopAuth, async (req: Request, res: Respons
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve quests',
     });
   }

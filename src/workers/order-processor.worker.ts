@@ -2,7 +2,8 @@ import { Worker, Job } from 'bullmq';
 import { redisConnection, QueueNames } from '../config/queue/connection';
 import { queueManager } from '../config/queue/queue-manager';
 import { questService } from '../services/quest-engine/quest.service';
-import { rewardService } from '../services/reward-system/reward.service';
+// Reward service might be needed in future for direct reward processing
+// import { rewardService } from '../services/reward-system/reward.service';
 import { logger } from '../utils/logger';
 import { ShopifyOrder } from '../services/quest-engine/types';
 import { QuestProgressStatus } from '@prisma/client';

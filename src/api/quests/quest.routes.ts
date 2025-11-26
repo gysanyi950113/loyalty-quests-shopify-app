@@ -50,7 +50,7 @@ const updateQuestSchema = z.object({
  * GET /api/quests
  * List all quests for the shop
  */
-router.get('/quests', async (req: Request, res: Response) => {
+router.get('/quests', async (req: Request, res: Response): Promise<any> => {
   try {
     const shopId = req.shop!.id;
     const activeOnly = req.query.active === 'true';
@@ -67,7 +67,7 @@ router.get('/quests', async (req: Request, res: Response) => {
     logger.error('Failed to list quests', {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve quests',
     });
   }
@@ -77,7 +77,7 @@ router.get('/quests', async (req: Request, res: Response) => {
  * GET /api/quests/:id
  * Get single quest by ID
  */
-router.get('/quests/:id', async (req: Request, res: Response) => {
+router.get('/quests/:id', async (req: Request, res: Response): Promise<any> => {
   try {
     const { id } = req.params;
     const quest = await questService.getQuestById(id);
@@ -101,7 +101,7 @@ router.get('/quests/:id', async (req: Request, res: Response) => {
       questId: req.params.id,
       error: error instanceof Error ? error.message : 'Unknown error',
     });
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve quest',
     });
   }
@@ -111,16 +111,16 @@ router.get('/quests/:id', async (req: Request, res: Response) => {
  * POST /api/quests
  * Create a new quest
  */
-router.post('/quests', async (req: Request, res: Response) => {
+router.post('/quests', async (req: Request, res: Response): Promise<any> => {
   try {
     const validatedData = createQuestSchema.parse(req.body);
 
     const quest = await questService.createQuest({
       shopId: req.shop!.id,
       ...validatedData,
-    });
+    } as any);
 
-    res.status(201).json({
+    return res.status(201).json({
       quest,
       message: 'Quest created successfully',
     });
@@ -137,7 +137,7 @@ router.post('/quests', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to create quest',
     });
   }
@@ -147,7 +147,7 @@ router.post('/quests', async (req: Request, res: Response) => {
  * PUT /api/quests/:id
  * Update an existing quest
  */
-router.put('/quests/:id', async (req: Request, res: Response) => {
+router.put('/quests/:id', async (req: Request, res: Response): Promise<any> => {
   try {
     const { id } = req.params;
 
@@ -180,7 +180,7 @@ router.put('/quests/:id', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to update quest',
     });
   }
@@ -190,7 +190,7 @@ router.put('/quests/:id', async (req: Request, res: Response) => {
  * DELETE /api/quests/:id
  * Delete (deactivate) a quest
  */
-router.delete('/quests/:id', async (req: Request, res: Response) => {
+router.delete('/quests/:id', async (req: Request, res: Response): Promise<any> => {
   try {
     const { id } = req.params;
 
@@ -214,7 +214,7 @@ router.delete('/quests/:id', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to delete quest',
     });
   }
@@ -224,7 +224,7 @@ router.delete('/quests/:id', async (req: Request, res: Response) => {
  * GET /api/quests/:id/progress
  * Get progress for all customers on a specific quest
  */
-router.get('/quests/:id/progress', async (req: Request, res: Response) => {
+router.get('/quests/:id/progress', async (req: Request, res: Response): Promise<any> => {
   try {
     const { id } = req.params;
 
@@ -259,7 +259,7 @@ router.get('/quests/:id/progress', async (req: Request, res: Response) => {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Failed to retrieve quest progress',
     });
   }

@@ -10,7 +10,7 @@ const router = Router();
 /**
  * OAuth Start - Redirect merchant to Shopify authorization
  */
-router.get('/auth', async (req: Request, res: Response) => {
+router.get('/auth', async (req: Request, res: Response): Promise<any> => {
   try {
     const shop = req.query.shop as string;
 
@@ -27,28 +27,29 @@ router.get('/auth', async (req: Request, res: Response) => {
       shop: shopify.utils.sanitizeShop(shop, true)!,
       callbackPath: '/api/auth/callback',
       isOnline: false, // Offline access for background tasks
+      rawRequest: req,
+      rawResponse: res,
     });
 
     logger.info('OAuth flow started', { shop });
 
-    res.redirect(authUrl);
+    return res.redirect(authUrl);
   } catch (error) {
     logger.error('OAuth start failed', {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
-    res.status(500).json({ error: 'Failed to start OAuth flow' });
+    return res.status(500).json({ error: 'Failed to start OAuth flow' });
   }
 });
 
 /**
  * OAuth Callback - Handle Shopify authorization callback
  */
-router.get('/auth/callback', async (req: Request, res: Response) => {
+router.get('/auth/callback', async (req: Request, res: Response): Promise<any> => {
   try {
-    const query = req.query as Record<string, string>;
-
     const callback = await shopify.auth.callback({
       rawRequest: req,
+      rawResponse: res,
     });
 
     const { session } = callback;
@@ -60,12 +61,12 @@ router.get('/auth/callback', async (req: Request, res: Response) => {
     // Store shop and access token in database
     await shopService.upsertShop({
       shopDomain: session.shop,
-      accessToken: session.accessToken,
+      accessToken: session.accessToken || '',
       scope: session.scope || config.shopify.scopes.join(','),
     });
 
     // Register webhooks
-    await webhookService.registerWebhooks(session.shop, session.accessToken);
+    await webhookService.registerWebhooks(session.shop, session.accessToken || '');
 
     logger.info('OAuth completed successfully', {
       shop: session.shop,
@@ -74,19 +75,19 @@ router.get('/auth/callback', async (req: Request, res: Response) => {
 
     // Redirect to app homepage or onboarding
     const redirectUrl = `https://${session.shop}/admin/apps/${config.shopify.apiKey}`;
-    res.redirect(redirectUrl);
+    return res.redirect(redirectUrl);
   } catch (error) {
     logger.error('OAuth callback failed', {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
-    res.status(500).json({ error: 'Failed to complete OAuth flow' });
+    return res.status(500).json({ error: 'Failed to complete OAuth flow' });
   }
 });
 
 /**
  * Verify installation status
  */
-router.get('/auth/verify', async (req: Request, res: Response) => {
+router.get('/auth/verify', async (req: Request, res: Response): Promise<any> => {
   try {
     const shop = req.query.shop as string;
 
@@ -114,7 +115,7 @@ router.get('/auth/verify', async (req: Request, res: Response) => {
     logger.error('Installation verification failed', {
       error: error instanceof Error ? error.message : 'Unknown error',
     });
-    res.status(500).json({ error: 'Failed to verify installation' });
+    return res.status(500).json({ error: 'Failed to verify installation' });
   }
 });
 

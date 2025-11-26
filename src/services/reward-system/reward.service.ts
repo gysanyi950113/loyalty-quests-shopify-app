@@ -181,20 +181,19 @@ export class RewardService {
     const priceRuleResponse = await client.post({
       path: 'price_rules',
       data: discountData,
-      type: 'application/json',
+      
     });
 
     const priceRuleId = (priceRuleResponse.body as any).price_rule.id;
 
     // Create discount code
-    const discountCodeResponse = await client.post({
+    await client.post({
       path: `price_rules/${priceRuleId}/discount_codes`,
       data: {
         discount_code: {
           code,
         },
       },
-      type: 'application/json',
     });
 
     logger.info('Percentage discount created', {
@@ -244,7 +243,7 @@ export class RewardService {
     const priceRuleResponse = await client.post({
       path: 'price_rules',
       data: discountData,
-      type: 'application/json',
+      
     });
 
     const priceRuleId = (priceRuleResponse.body as any).price_rule.id;
@@ -256,7 +255,7 @@ export class RewardService {
           code,
         },
       },
-      type: 'application/json',
+      
     });
 
     logger.info('Fixed discount created', {
@@ -307,7 +306,7 @@ export class RewardService {
     const priceRuleResponse = await client.post({
       path: 'price_rules',
       data: discountData,
-      type: 'application/json',
+      
     });
 
     const priceRuleId = (priceRuleResponse.body as any).price_rule.id;
@@ -319,7 +318,7 @@ export class RewardService {
           code,
         },
       },
-      type: 'application/json',
+      
     });
 
     logger.info('Free shipping discount created', {
@@ -333,9 +332,8 @@ export class RewardService {
   /**
    * Generate unique discount code
    */
-  private generateDiscountCode(prefix: string, questId: string, customerId: string): string {
+  private generateDiscountCode(prefix: string, questId: string, _customerId: string): string {
     const questPart = questId.substring(0, 8).toUpperCase();
-    const customerPart = customerId.substring(0, 6);
     const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
     return `${prefix}-${questPart}-${randomPart}`;
   }
@@ -415,9 +413,6 @@ export class RewardService {
       where: { questId },
       _count: {
         id: true,
-      },
-      _sum: {
-        redeemedAt: true,
       },
     });
 

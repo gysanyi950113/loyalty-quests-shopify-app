@@ -25,7 +25,7 @@ export async function authenticateShop(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   try {
     const shopDomain =
       (req.query.shop as string) ||
@@ -33,26 +33,29 @@ export async function authenticateShop(
       req.get('X-Shop-Domain');
 
     if (!shopDomain) {
-      return res.status(401).json({
+      res.status(401).json({
         error: 'Unauthorized',
         message: 'Shop domain required',
       });
+      return;
     }
 
     const shop = await shopService.getShopByDomain(shopDomain);
 
     if (!shop) {
-      return res.status(404).json({
+      res.status(404).json({
         error: 'Not Found',
         message: 'Shop not found. Please install the app first.',
       });
+      return;
     }
 
     if (shop.status !== ShopStatus.ACTIVE) {
-      return res.status(403).json({
+      res.status(403).json({
         error: 'Forbidden',
         message: `Shop is ${shop.status.toLowerCase()}`,
       });
+      return;
     }
 
     // Attach shop to request
@@ -82,19 +85,21 @@ export async function requireActiveShop(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   if (!req.shop) {
-    return res.status(401).json({
+    res.status(401).json({
       error: 'Unauthorized',
       message: 'Shop authentication required',
     });
+    return;
   }
 
   if (req.shop.status !== ShopStatus.ACTIVE) {
-    return res.status(403).json({
+    res.status(403).json({
       error: 'Forbidden',
       message: 'Shop must be active to access this resource',
     });
+    return;
   }
 
   next();
@@ -105,7 +110,7 @@ export async function requireActiveShop(
  */
 export async function optionalShopAuth(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) {
   try {
