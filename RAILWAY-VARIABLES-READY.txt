@@ -1,0 +1,60 @@
+# ========================================
+# COPY THIS TO RAILWAY - READY TO USE
+# ========================================
+# Go to: https://railway.app
+# Your Project → Variables → Raw Editor
+# Paste everything below (replace YOUR_SHOPIFY_API_KEY and YOUR_SHOPIFY_API_SECRET)
+# ========================================
+
+NODE_ENV=production
+APP_URL=https://loyalty-quests-shopify-app-production.up.railway.app
+HOST=0.0.0.0
+PORT=3000
+
+# Replace these two with your actual Shopify credentials:
+SHOPIFY_API_KEY=YOUR_SHOPIFY_API_KEY
+SHOPIFY_API_SECRET=YOUR_SHOPIFY_API_SECRET
+
+SHOPIFY_SCOPES=read_products,write_products,read_orders,write_orders,read_customers,write_customers,read_discounts,write_discounts
+
+# Railway Production Database (you'll need to update this)
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/loyalty_quests_dev
+
+SESSION_SECRET=e3247ba8f4ea674ac6ba88c1806ec1b13cb26e980ecfda2fe4b8247aa151306e
+
+BILLING_CALLBACK_URL=https://loyalty-quests-shopify-app-production.up.railway.app/api/billing/callback
+
+ENABLE_ANALYTICS=true
+ENABLE_QUEST_ENGINE=true
+ENABLE_REWARD_SYSTEM=true
+ENABLE_WEBHOOK_AUTOMATION=true
+
+LOG_LEVEL=info
+DEBUG=false
+
+# ========================================
+# IMPORTANT NOTES:
+# ========================================
+
+# 1. DATABASE_URL above is your LOCAL database
+#    Railway will need its own PostgreSQL database
+#
+#    TO ADD RAILWAY DATABASE:
+#    - Railway Dashboard → New → Database → Add PostgreSQL
+#    - Railway will auto-create DATABASE_URL variable
+#    - You can remove the localhost one after Railway creates it
+
+# 2. OPTIONAL: Add Redis for better performance
+#    - Railway Dashboard → New → Database → Add Redis
+#    - Railway will auto-create REDIS_URL variable
+
+# 3. After adding variables and databases:
+#    - Click "Deploy" or push to GitHub (auto-deploys)
+#    - Monitor logs: Railway Dashboard → Deployments → View Logs
+
+# ========================================
+# WHAT TO REPLACE:
+# ========================================
+# ✏️  SHOPIFY_API_KEY → Your actual Shopify API key
+# ✏️  SHOPIFY_API_SECRET → Your actual Shopify API secret
+# ✏️  DATABASE_URL → Will be auto-replaced when you add PostgreSQL in Railway

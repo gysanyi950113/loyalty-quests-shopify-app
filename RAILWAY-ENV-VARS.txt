@@ -1,0 +1,72 @@
+# Copy these to Railway Dashboard → Your Project → Variables
+
+# ============================================
+# REQUIRED - Application Configuration
+# ============================================
+NODE_ENV=production
+APP_URL=https://loyalty-quests-shopify-app-production.up.railway.app
+HOST=0.0.0.0
+PORT=3000
+
+# ============================================
+# REQUIRED - Shopify Configuration
+# ============================================
+SHOPIFY_API_KEY=your_shopify_api_key_here
+SHOPIFY_API_SECRET=your_shopify_api_secret_here
+SHOPIFY_SCOPES=read_products,write_products,read_orders,write_orders,read_customers,write_customers,read_discounts,write_discounts
+
+# ============================================
+# REQUIRED - Database (Railway auto-sets this)
+# ============================================
+# DATABASE_URL=postgresql://...
+# ↑ This should already exist if you added PostgreSQL database in Railway
+# If not: Railway Dashboard → New → Database → Add PostgreSQL
+
+# ============================================
+# OPTIONAL - Redis (Railway auto-sets this)
+# ============================================
+# REDIS_URL=redis://...
+# ↑ Add Redis database: Railway Dashboard → New → Database → Add Redis
+
+# ============================================
+# OPTIONAL - BullMQ (only if not using REDIS_URL)
+# ============================================
+BULLMQ_REDIS_HOST=localhost
+BULLMQ_REDIS_PORT=6379
+
+# ============================================
+# REQUIRED - Security
+# ============================================
+# Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+SESSION_SECRET=REPLACE_WITH_32_CHARACTER_RANDOM_STRING
+
+# ============================================
+# OPTIONAL - Billing
+# ============================================
+BILLING_CALLBACK_URL=https://loyalty-quests-shopify-app-production.up.railway.app/api/billing/callback
+
+# ============================================
+# REQUIRED - Feature Flags
+# ============================================
+ENABLE_ANALYTICS=true
+ENABLE_QUEST_ENGINE=true
+ENABLE_REWARD_SYSTEM=true
+ENABLE_WEBHOOK_AUTOMATION=true
+
+# ============================================
+# REQUIRED - Logging
+# ============================================
+LOG_LEVEL=info
+DEBUG=false
+
+# ============================================
+# INSTRUCTIONS
+# ============================================
+# 1. Go to: https://railway.app/project/your-project-id/service/your-service-id
+# 2. Click "Variables" tab
+# 3. Click "Raw Editor" button
+# 4. Copy the variables above (excluding comments starting with #)
+# 5. Paste into the editor
+# 6. Update SHOPIFY_API_KEY and SHOPIFY_API_SECRET with real values
+# 7. Update SESSION_SECRET with a random 32+ character string
+# 8. Click "Save" - Railway will auto-redeploy
