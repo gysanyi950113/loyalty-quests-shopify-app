@@ -30,6 +30,7 @@ const envSchema = z.object({
   // BullMQ
   BULLMQ_REDIS_HOST: z.string().default('localhost'),
   BULLMQ_REDIS_PORT: z.string().transform(Number).default('6379'),
+  BULLMQ_REDIS_PASSWORD: z.string().optional(),
 
   // Logging
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
@@ -92,6 +93,7 @@ export const config = {
     redis: {
       host: env.BULLMQ_REDIS_HOST,
       port: env.BULLMQ_REDIS_PORT,
+      password: env.BULLMQ_REDIS_PASSWORD,
     },
   },
   logging: {

@@ -8,6 +8,7 @@ import { logger } from '../../utils/logger';
 export const redisConnection: ConnectionOptions = {
   host: config.bullmq.redis.host,
   port: config.bullmq.redis.port,
+  password: config.bullmq.redis.password,
   maxRetriesPerRequest: null,
   retryStrategy: (times: number) => {
     const delay = Math.min(times * 50, 2000);
