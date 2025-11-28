@@ -11,7 +11,7 @@ const envSchema = z.object({
 
   // App Configuration
   APP_URL: z.string().url('APP_URL must be a valid URL'),
-  HOST: z.string().default('localhost'),
+  HOST: z.string().default('0.0.0.0'),
   PORT: z.string().transform(Number).default('3000'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
 

@@ -1,0 +1,508 @@
+PS E:\Sanca\PROJECT\Vibe\ShoppingQuestApp> railway variables       
+╔══════════════════ Variables for loyalty-quests-shopify-app ══════════════════╗
+║ APP_HOST                                       │ 0.0.0.0                     ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ APP_PORT                                       │ 3000                        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ APP_URL                                        │ https://loyalty-            ║
+║                                                │ quests-shopify-app-         ║
+║                                                │ production.up.railway.app   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ BULLMQ_BACKOFF_DELAY                           │ 5000                        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ BULLMQ_MAX_RETRIES                             │ 3                           ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ DATABASE_URL                                   │ postgresql://               ║
+║                                                │ postgres:JKeFPxSwRERhQKcRVS ║
+║                                                │ XClSYGcjwGEhal@crossover.pr ║
+║                                                │ oxy.rlwy.net:48420/railway  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ ENABLE_ANALYTICS                               │ true                        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ ENABLE_WEBHOOK_AUTOMATION                      │ true                        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ JWT_SECRET                                     │ your_jwt_secret_minimum_32_ ║
+║                                                │ characters_long             ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ LOG_LEVEL                                      │ debug                       ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ NODE_ENV                                       │ production                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT                            │ production                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT_ID                         │ e9b91e69-022d-4b74-80ba-    ║
+║                                                │ 7133527f1f3e                ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT_NAME                       │ production                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_PRIVATE_DOMAIN                         │ loyalty-quests-shopify-     ║
+║                                                │ app.railway.internal        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_PROJECT_ID                             │ c06e778f-3426-4f34-9caf-    ║
+║                                                │ 8372ce7a27bd                ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_PROJECT_NAME                           │ pleasant-gratitude          ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_PUBLIC_DOMAIN                          │ loyalty-quests-shopify-app- ║
+║                                                │ production.up.railway.app   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_ID                             │ 589e15a3-d7cc-49ef-a517-    ║
+║                                                │ af3a1aea0b20                ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_LOYALTY_QUESTS_SHOPIFY_APP_URL │ loyalty-quests-shopify-app- ║
+║                                                │ production.up.railway.app   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_NAME                           │ loyalty-quests-shopify-app  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ RAILWAY_STATIC_URL                             │ loyalty-quests-shopify-app- ║
+║                                                │ production.up.railway.app   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ REDIS_URL                                      │ redis://                    ║
+║                                                │ default:toZMoysxCqHbQnjhlSr ║
+║                                                │ BYAZBwPcZczyO@maglev.proxy. ║
+║                                                │ rlwy.net:31766              ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SESSION_SECRET                                 │ your_session_secret_minimum ║
+║                                                │ _32_characters              ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SHOPIFY_API_KEY                                │ cef9766153e3d9728290880340c ║
+║                                                │ b2e33                       ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SHOPIFY_API_SECRET                             │ shpss_e51d74b387fe0326cbe76 ║
+║                                                │ cd4efca5383                 ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SHOPIFY_APP_URL                                │ loyalty-quests-shopify-app- ║
+║                                                │ production.up.railway.app   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SHOPIFY_SCOPES                                 │ read_customers,write_custom ║
+║                                                │ ers,read_orders,write_order ║
+║                                                │ s,read_products,read_discou ║
+║                                                │ nts,write_discounts,re      ║
+║                                                │                             ║
+║                                                │ ad_price_rules,write_price_ ║
+║                                                │ rules                       ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ SHOPIFY_WEBHOOK_SECRET                         │ your_webhook_secret         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+PS E:\Sanca\PROJECT\Vibe\ShoppingQuestApp> railway logs     
+Starting Container
+
+> loyalty-quests-shopify-app@0.1.0 start
+> node dist/index.js
+
+2025-11-27 20:41:27 [warn]: [Shopify] [shopify-api/INFO] version 11.14.1, environment Node v20.19.6
+2025-11-27 20:41:27 [warn]: [Shopify] [shopify-api/INFO] Future flag lineItemBilling is disabled.
+npm warn config production Use `--omit=dev` instead.
+
+  Enable this flag to use the new billing API, that supports multiple line items per plan.
+
+2025-11-27 20:41:27 [warn]: [Shopify] [shopify-api/INFO] Future flag customerAddressDefaultFix is disabled.
+
+
+2025-11-27 20:41:27 [info]: 📊 Environment: production
+2025-11-27 20:41:27 [info]: 🚀 Loyalty Quests server running on http://localhost:8080
+  Enable this flag to change the CustomerAddress classes to expose a 'is_default' property instead of 'default' when fetching data.
+
+2025-11-27 20:41:27 [info]: ✨ Features enabled: {"analytics":true,"questEngine":true,"rewardSystem":true,"webhookAutomation":true}
+2025-11-27 20:41:27 [warn]: [Shopify] [shopify-api/INFO] Future flag unstable_managedPricingSupport is disabled.
+
+  Enable this flag to support managed pricing, so apps can check for payments without needing a billing config. Learn more at https://shopify.dev/docs/apps/launch/billing/managed-pricing
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":2,"delayMs":100}
+2025-11-27 20:41:27 [info]: ✓ Order Processor Worker started
+2025-11-27 20:41:27 [info]: ✓ Reward Issuer Worker started
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":1,"delayMs":50}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":1,"delayMs":50}
+2025-11-27 20:41:27 [info]: All workers started successfully
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":1,"delayMs":50}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":1,"delayMs":50}
+2025-11-27 20:41:27 [info]: Starting all BullMQ workers...
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":2,"delayMs":100}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":4,"delayMs":200}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":4,"delayMs":200}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":5,"delayMs":250}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":6,"delayMs":300}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":5,"delayMs":250}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":5,"delayMs":250}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":6,"delayMs":300}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":5,"delayMs":250}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":2,"delayMs":100}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":2,"delayMs":100}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":3,"delayMs":150}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":3,"delayMs":150}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":3,"delayMs":150}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":3,"delayMs":150}
+2025-11-27 20:41:27 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":4,"delayMs":200}
+2025-11-27 20:41:27 [warn]: Redis connection retry {"attempt":4,"delayMs":200}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":6,"delayMs":300}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":6,"delayMs":300}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":7,"delayMs":350}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":7,"delayMs":350}
+2025-11-27 20:41:28 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:28 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":7,"delayMs":350}
+2025-11-27 20:41:28 [warn]: Redis connection retry {"attempt":7,"delayMs":350}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":8,"delayMs":400}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":8,"delayMs":400}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":8,"delayMs":400}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":8,"delayMs":400}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":9,"delayMs":450}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":10,"delayMs":500}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":9,"delayMs":450}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":10,"delayMs":500}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":9,"delayMs":450}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":10,"delayMs":500}
+2025-11-27 20:41:29 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":9,"delayMs":450}
+2025-11-27 20:41:29 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:29 [warn]: Redis connection retry {"attempt":10,"delayMs":500}
+2025-11-27 20:41:30 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":11,"delayMs":550}
+2025-11-27 20:41:30 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":11,"delayMs":550}
+2025-11-27 20:41:30 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":11,"delayMs":550}
+2025-11-27 20:41:30 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":11,"delayMs":550}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":12,"delayMs":600}
+2025-11-27 20:41:31 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:31 [warn]: Redis connection retry {"attempt":13,"delayMs":650}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":12,"delayMs":600}
+2025-11-27 20:41:30 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:30 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:30 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":12,"delayMs":600}
+2025-11-27 20:41:30 [warn]: Redis connection retry {"attempt":12,"delayMs":600}
+2025-11-27 20:41:30 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:31 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:31 [warn]: Redis connection retry {"attempt":13,"delayMs":650}
+2025-11-27 20:41:31 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:31 [warn]: Redis connection retry {"attempt":13,"delayMs":650}
+2025-11-27 20:41:31 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:31 [warn]: Redis connection retry {"attempt":13,"delayMs":650}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":14,"delayMs":700}
+2025-11-27 20:41:32 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":14,"delayMs":700}
+2025-11-27 20:41:32 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":14,"delayMs":700}
+2025-11-27 20:41:32 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":14,"delayMs":700}
+2025-11-27 20:41:32 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:32 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":15,"delayMs":750}
+2025-11-27 20:41:32 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":15,"delayMs":750}
+2025-11-27 20:41:32 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":15,"delayMs":750}
+2025-11-27 20:41:32 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:32 [warn]: Redis connection retry {"attempt":15,"delayMs":750}
+2025-11-27 20:41:33 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:33 [warn]: Redis connection retry {"attempt":16,"delayMs":800}
+2025-11-27 20:41:33 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:33 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:33 [warn]: Redis connection retry {"attempt":16,"delayMs":800}
+2025-11-27 20:41:33 [warn]: Redis connection retry {"attempt":16,"delayMs":800}
+2025-11-27 20:41:33 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:33 [warn]: Redis connection retry {"attempt":16,"delayMs":800}
+2025-11-27 20:41:34 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:34 [warn]: Redis connection retry {"attempt":17,"delayMs":850}
+2025-11-27 20:41:34 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:34 [warn]: Redis connection retry {"attempt":17,"delayMs":850}
+2025-11-27 20:41:34 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:34 [warn]: Redis connection retry {"attempt":17,"delayMs":850}
+2025-11-27 20:41:34 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:34 [warn]: Redis connection retry {"attempt":17,"delayMs":850}
+2025-11-27 20:41:35 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:35 [warn]: Redis connection retry {"attempt":18,"delayMs":900}
+2025-11-27 20:41:35 [warn]: Redis connection retry {"attempt":18,"delayMs":900}
+2025-11-27 20:41:35 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:35 [warn]: Redis connection retry {"attempt":18,"delayMs":900}
+2025-11-27 20:41:35 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:35 [warn]: Redis connection retry {"attempt":18,"delayMs":900}
+2025-11-27 20:41:35 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:36 [warn]: Redis connection retry {"attempt":19,"delayMs":950}
+2025-11-27 20:41:36 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:36 [warn]: Redis connection retry {"attempt":19,"delayMs":950}
+2025-11-27 20:41:36 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:36 [warn]: Redis connection retry {"attempt":19,"delayMs":950}
+2025-11-27 20:41:36 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:36 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:36 [warn]: Redis connection retry {"attempt":19,"delayMs":950}
+2025-11-27 20:41:37 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:37 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:37 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:37 [warn]: Redis connection retry {"attempt":20,"delayMs":1000}
+2025-11-27 20:41:37 [warn]: Redis connection retry {"attempt":20,"delayMs":1000}
+2025-11-27 20:41:37 [warn]: Redis connection retry {"attempt":20,"delayMs":1000}
+2025-11-27 20:41:37 [warn]: Redis connection retry {"attempt":20,"delayMs":1000}
+2025-11-27 20:41:37 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:38 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:38 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:38 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:38 [warn]: Redis connection retry {"attempt":21,"delayMs":1050}
+2025-11-27 20:41:38 [warn]: Redis connection retry {"attempt":21,"delayMs":1050}
+2025-11-27 20:41:38 [warn]: Redis connection retry {"attempt":21,"delayMs":1050}
+2025-11-27 20:41:38 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:38 [warn]: Redis connection retry {"attempt":21,"delayMs":1050}
+2025-11-27 20:41:39 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:39 [warn]: Redis connection retry {"attempt":22,"delayMs":1100}
+2025-11-27 20:41:39 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:39 [warn]: Redis connection retry {"attempt":22,"delayMs":1100}
+2025-11-27 20:41:39 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:39 [warn]: Redis connection retry {"attempt":22,"delayMs":1100}
+2025-11-27 20:41:39 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:39 [warn]: Redis connection retry {"attempt":22,"delayMs":1100}
+2025-11-27 20:41:40 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:40 [warn]: Redis connection retry {"attempt":23,"delayMs":1150}
+2025-11-27 20:41:40 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:40 [warn]: Redis connection retry {"attempt":23,"delayMs":1150}
+2025-11-27 20:41:40 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:40 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:40 [warn]: Redis connection retry {"attempt":23,"delayMs":1150}
+2025-11-27 20:41:40 [warn]: Redis connection retry {"attempt":23,"delayMs":1150}
+2025-11-27 20:41:41 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:41 [warn]: Redis connection retry {"attempt":24,"delayMs":1200}
+2025-11-27 20:41:41 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:41 [warn]: Redis connection retry {"attempt":24,"delayMs":1200}
+2025-11-27 20:41:41 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:41 [warn]: Redis connection retry {"attempt":24,"delayMs":1200}
+2025-11-27 20:41:41 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:41 [warn]: Redis connection retry {"attempt":24,"delayMs":1200}
+2025-11-27 20:41:42 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:42 [warn]: Redis connection retry {"attempt":25,"delayMs":1250}
+2025-11-27 20:41:42 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:42 [warn]: Redis connection retry {"attempt":25,"delayMs":1250}
+2025-11-27 20:41:42 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:42 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:42 [warn]: Redis connection retry {"attempt":25,"delayMs":1250}
+2025-11-27 20:41:42 [warn]: Redis connection retry {"attempt":25,"delayMs":1250}
+2025-11-27 20:41:43 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:43 [warn]: Redis connection retry {"attempt":26,"delayMs":1300}
+2025-11-27 20:41:43 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:43 [warn]: Redis connection retry {"attempt":26,"delayMs":1300}
+2025-11-27 20:41:43 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:43 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:43 [warn]: Redis connection retry {"attempt":26,"delayMs":1300}
+2025-11-27 20:41:43 [warn]: Redis connection retry {"attempt":26,"delayMs":1300}
+2025-11-27 20:41:45 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:45 [warn]: Redis connection retry {"attempt":27,"delayMs":1350}
+2025-11-27 20:41:45 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:45 [warn]: Redis connection retry {"attempt":27,"delayMs":1350}
+2025-11-27 20:41:45 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:45 [warn]: Redis connection retry {"attempt":27,"delayMs":1350}
+2025-11-27 20:41:45 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:45 [warn]: Redis connection retry {"attempt":27,"delayMs":1350}
+2025-11-27 20:41:46 [warn]: Redis connection retry {"attempt":28,"delayMs":1400}
+2025-11-27 20:41:46 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:46 [warn]: Redis connection retry {"attempt":28,"delayMs":1400}
+2025-11-27 20:41:46 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:46 [warn]: Redis connection retry {"attempt":28,"delayMs":1400}
+2025-11-27 20:41:46 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:46 [warn]: Redis connection retry {"attempt":28,"delayMs":1400}
+2025-11-27 20:41:46 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:48 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:48 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:48 [warn]: Redis connection retry {"attempt":29,"delayMs":1450}
+2025-11-27 20:41:48 [warn]: Redis connection retry {"attempt":29,"delayMs":1450}
+2025-11-27 20:41:48 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:48 [warn]: Redis connection retry {"attempt":29,"delayMs":1450}
+2025-11-27 20:41:48 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:48 [warn]: Redis connection retry {"attempt":29,"delayMs":1450}
+2025-11-27 20:41:49 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:49 [warn]: Redis connection retry {"attempt":30,"delayMs":1500}
+2025-11-27 20:41:49 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:49 [warn]: Redis connection retry {"attempt":30,"delayMs":1500}
+2025-11-27 20:41:49 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:49 [warn]: Redis connection retry {"attempt":30,"delayMs":1500}
+2025-11-27 20:41:49 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:49 [warn]: Redis connection retry {"attempt":30,"delayMs":1500}
+2025-11-27 20:41:50 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:50 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:50 [warn]: Redis connection retry {"attempt":31,"delayMs":1550}
+2025-11-27 20:41:50 [warn]: Redis connection retry {"attempt":31,"delayMs":1550}
+2025-11-27 20:41:50 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:50 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:50 [warn]: Redis connection retry {"attempt":31,"delayMs":1550}
+2025-11-27 20:41:50 [warn]: Redis connection retry {"attempt":31,"delayMs":1550}
+2025-11-27 20:41:52 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:52 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:52 [warn]: Redis connection retry {"attempt":32,"delayMs":1600}
+2025-11-27 20:41:52 [warn]: Redis connection retry {"attempt":32,"delayMs":1600}
+2025-11-27 20:41:52 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:52 [warn]: Redis connection retry {"attempt":32,"delayMs":1600}
+2025-11-27 20:41:52 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:52 [warn]: Redis connection retry {"attempt":32,"delayMs":1600}
+2025-11-27 20:41:54 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:54 [warn]: Redis connection retry {"attempt":33,"delayMs":1650}
+2025-11-27 20:41:54 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:54 [warn]: Redis connection retry {"attempt":33,"delayMs":1650}
+2025-11-27 20:41:54 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:54 [warn]: Redis connection retry {"attempt":33,"delayMs":1650}
+2025-11-27 20:41:54 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:54 [warn]: Redis connection retry {"attempt":33,"delayMs":1650}
+2025-11-27 20:41:55 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:55 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:55 [warn]: Redis connection retry {"attempt":34,"delayMs":1700}
+2025-11-27 20:41:55 [warn]: Redis connection retry {"attempt":34,"delayMs":1700}
+2025-11-27 20:41:55 [warn]: Redis connection retry {"attempt":34,"delayMs":1700}
+2025-11-27 20:41:55 [warn]: Redis connection retry {"attempt":34,"delayMs":1700}
+2025-11-27 20:41:55 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:55 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:57 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:57 [warn]: Redis connection retry {"attempt":35,"delayMs":1750}
+2025-11-27 20:41:57 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:57 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:57 [warn]: Redis connection retry {"attempt":35,"delayMs":1750}
+2025-11-27 20:41:57 [warn]: Redis connection retry {"attempt":35,"delayMs":1750}
+2025-11-27 20:41:57 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:57 [warn]: Redis connection retry {"attempt":35,"delayMs":1750}
+2025-11-27 20:41:59 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:59 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:59 [error]: Order processor worker error {"error":""}
+2025-11-27 20:41:59 [warn]: Redis connection retry {"attempt":36,"delayMs":1800}
+2025-11-27 20:41:59 [warn]: Redis connection retry {"attempt":36,"delayMs":1800}
+2025-11-27 20:41:59 [warn]: Redis connection retry {"attempt":36,"delayMs":1800}
+2025-11-27 20:41:59 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:41:59 [warn]: Redis connection retry {"attempt":36,"delayMs":1800}
+2025-11-27 20:42:01 [warn]: Redis connection retry {"attempt":37,"delayMs":1850}
+2025-11-27 20:42:01 [warn]: Redis connection retry {"attempt":37,"delayMs":1850}
+2025-11-27 20:42:01 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:01 [warn]: Redis connection retry {"attempt":37,"delayMs":1850}
+2025-11-27 20:42:01 [warn]: Redis connection retry {"attempt":37,"delayMs":1850}
+2025-11-27 20:42:01 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:01 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:01 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:02 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:02 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:02 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:02 [warn]: Redis connection retry {"attempt":38,"delayMs":1900}
+2025-11-27 20:42:02 [warn]: Redis connection retry {"attempt":38,"delayMs":1900}
+2025-11-27 20:42:02 [warn]: Redis connection retry {"attempt":38,"delayMs":1900}
+2025-11-27 20:42:02 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:02 [warn]: Redis connection retry {"attempt":38,"delayMs":1900}
+2025-11-27 20:42:04 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:04 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:04 [warn]: Redis connection retry {"attempt":39,"delayMs":1950}
+2025-11-27 20:42:04 [warn]: Redis connection retry {"attempt":39,"delayMs":1950}
+2025-11-27 20:42:04 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:04 [warn]: Redis connection retry {"attempt":39,"delayMs":1950}
+2025-11-27 20:42:04 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:04 [warn]: Redis connection retry {"attempt":39,"delayMs":1950}
+2025-11-27 20:42:06 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:06 [warn]: Redis connection retry {"attempt":40,"delayMs":2000}
+2025-11-27 20:42:06 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:06 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:06 [warn]: Redis connection retry {"attempt":40,"delayMs":2000}
+2025-11-27 20:42:06 [warn]: Redis connection retry {"attempt":40,"delayMs":2000}
+2025-11-27 20:42:06 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:06 [warn]: Redis connection retry {"attempt":40,"delayMs":2000}
+2025-11-27 20:42:08 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:08 [warn]: Redis connection retry {"attempt":41,"delayMs":2000}
+2025-11-27 20:42:08 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:08 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:08 [warn]: Redis connection retry {"attempt":41,"delayMs":2000}
+2025-11-27 20:42:08 [warn]: Redis connection retry {"attempt":41,"delayMs":2000}
+2025-11-27 20:42:08 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:08 [warn]: Redis connection retry {"attempt":41,"delayMs":2000}
+2025-11-27 20:42:10 [warn]: Redis connection retry {"attempt":42,"delayMs":2000}
+2025-11-27 20:42:10 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:10 [warn]: Redis connection retry {"attempt":42,"delayMs":2000}
+2025-11-27 20:42:10 [warn]: Redis connection retry {"attempt":42,"delayMs":2000}
+2025-11-27 20:42:10 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:10 [warn]: Redis connection retry {"attempt":42,"delayMs":2000}
+2025-11-27 20:42:10 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:10 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:12 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:12 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:12 [warn]: Redis connection retry {"attempt":43,"delayMs":2000}
+2025-11-27 20:42:12 [warn]: Redis connection retry {"attempt":43,"delayMs":2000}
+2025-11-27 20:42:12 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:12 [warn]: Redis connection retry {"attempt":43,"delayMs":2000}
+2025-11-27 20:42:12 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:12 [warn]: Redis connection retry {"attempt":43,"delayMs":2000}
+2025-11-27 20:42:14 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:14 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:14 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:14 [warn]: Redis connection retry {"attempt":44,"delayMs":2000}
+2025-11-27 20:42:14 [warn]: Redis connection retry {"attempt":44,"delayMs":2000}
+2025-11-27 20:42:14 [warn]: Redis connection retry {"attempt":44,"delayMs":2000}
+2025-11-27 20:42:14 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:14 [warn]: Redis connection retry {"attempt":44,"delayMs":2000}
+2025-11-27 20:42:16 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:16 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:16 [warn]: Redis connection retry {"attempt":45,"delayMs":2000}
+2025-11-27 20:42:16 [warn]: Redis connection retry {"attempt":45,"delayMs":2000}
+2025-11-27 20:42:16 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:16 [warn]: Redis connection retry {"attempt":45,"delayMs":2000}
+2025-11-27 20:42:16 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:16 [warn]: Redis connection retry {"attempt":45,"delayMs":2000}
+2025-11-27 20:42:18 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:18 [warn]: Redis connection retry {"attempt":46,"delayMs":2000}
+2025-11-27 20:42:18 [warn]: Redis connection retry {"attempt":46,"delayMs":2000}
+2025-11-27 20:42:18 [warn]: Redis connection retry {"attempt":46,"delayMs":2000}
+2025-11-27 20:42:18 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:18 [warn]: Redis connection retry {"attempt":46,"delayMs":2000}
+2025-11-27 20:42:18 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:18 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:20 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:20 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:20 [warn]: Redis connection retry {"attempt":47,"delayMs":2000}
+2025-11-27 20:42:20 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:20 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:20 [warn]: Redis connection retry {"attempt":47,"delayMs":2000}
+2025-11-27 20:42:20 [warn]: Redis connection retry {"attempt":47,"delayMs":2000}
+2025-11-27 20:42:20 [warn]: Redis connection retry {"attempt":47,"delayMs":2000}
+2025-11-27 20:42:22 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:22 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:22 [warn]: Redis connection retry {"attempt":48,"delayMs":2000}
+2025-11-27 20:42:22 [warn]: Redis connection retry {"attempt":48,"delayMs":2000}
+2025-11-27 20:42:22 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:22 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:22 [warn]: Redis connection retry {"attempt":48,"delayMs":2000}
+2025-11-27 20:42:22 [warn]: Redis connection retry {"attempt":48,"delayMs":2000}
+2025-11-27 20:42:24 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:24 [warn]: Redis connection retry {"attempt":49,"delayMs":2000}
+2025-11-27 20:42:24 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:24 [error]: Order processor worker error {"error":""}
+2025-11-27 20:42:24 [warn]: Redis connection retry {"attempt":49,"delayMs":2000}
+2025-11-27 20:42:24 [warn]: Redis connection retry {"attempt":49,"delayMs":2000}
+2025-11-27 20:42:24 [error]: Reward issuer worker error {"error":""}
+2025-11-27 20:42:24 [warn]: Redis connection retry {"attempt":49,"delayMs":2000}
+2025-11-27 20:42:26 [error]: Order processor worker error {"error":""}
