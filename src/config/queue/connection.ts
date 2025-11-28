@@ -3,13 +3,26 @@ import { config } from '../environment';
 import { logger } from '../../utils/logger';
 
 /**
+ * Parse Redis URL to extract connection details
+ */
+function parseRedisUrl(url: string): { host: string; port: number; password?: string; username?: string } {
+  const parsed = new URL(url);
+  return {
+    host: parsed.hostname,
+    port: parseInt(parsed.port) || 6379,
+    username: parsed.username || undefined,
+    password: parsed.password || undefined,
+  };
+}
+
+/**
  * Redis connection configuration for BullMQ
  * Prefer REDIS_URL if available, otherwise use individual params
  */
 export const redisConnection: ConnectionOptions = config.redis.url
   ? {
       // Use Redis URL if available (includes auth)
-      ...(require('ioredis').parseURL(config.redis.url)),
+      ...parseRedisUrl(config.redis.url),
       maxRetriesPerRequest: null,
       retryStrategy: (times: number) => {
         const delay = Math.min(times * 50, 2000);
