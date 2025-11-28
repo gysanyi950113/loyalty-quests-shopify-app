@@ -4,18 +4,31 @@ import { logger } from '../../utils/logger';
 
 /**
  * Redis connection configuration for BullMQ
+ * Prefer REDIS_URL if available, otherwise use individual params
  */
-export const redisConnection: ConnectionOptions = {
-  host: config.bullmq.redis.host,
-  port: config.bullmq.redis.port,
-  password: config.bullmq.redis.password,
-  maxRetriesPerRequest: null,
-  retryStrategy: (times: number) => {
-    const delay = Math.min(times * 50, 2000);
-    logger.warn('Redis connection retry', { attempt: times, delayMs: delay });
-    return delay;
-  },
-};
+export const redisConnection: ConnectionOptions = config.redis.url
+  ? {
+      // Use Redis URL if available (includes auth)
+      ...(require('ioredis').parseURL(config.redis.url)),
+      maxRetriesPerRequest: null,
+      retryStrategy: (times: number) => {
+        const delay = Math.min(times * 50, 2000);
+        logger.warn('Redis connection retry', { attempt: times, delayMs: delay });
+        return delay;
+      },
+    }
+  : {
+      // Fallback to individual connection params
+      host: config.bullmq.redis.host,
+      port: config.bullmq.redis.port,
+      ...(config.bullmq.redis.password && { password: config.bullmq.redis.password }),
+      maxRetriesPerRequest: null,
+      retryStrategy: (times: number) => {
+        const delay = Math.min(times * 50, 2000);
+        logger.warn('Redis connection retry', { attempt: times, delayMs: delay });
+        return delay;
+      },
+    };
 
 /**
  * Default job options for all queues
