@@ -8,9 +8,15 @@ import questRoutes from './api/quests/quest.routes';
 import rewardRoutes from './api/rewards/reward.routes';
 import publicRoutes from './api/public/public.routes';
 import analyticsRoutes from './api/analytics/analytics.routes';
+import proxyRoutes from './api/proxy/proxy.routes';
 import { startWorkers, stopWorkers } from './workers';
+import path from 'path';
 
 const app = express();
+
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Security middleware
 app.use(helmet());
@@ -49,6 +55,7 @@ app.use('/api', webhookRoutes);
 app.use('/api', questRoutes);
 app.use('/api', rewardRoutes);
 app.use('/api', analyticsRoutes);
+app.use('/api/proxy', proxyRoutes); // App Proxy routes (customer-facing)
 app.use('/', publicRoutes); // Public routes (no /api prefix)
 
 // 404 handler
