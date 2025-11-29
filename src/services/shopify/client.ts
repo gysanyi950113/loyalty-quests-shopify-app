@@ -11,7 +11,7 @@ export const shopify = shopifyApi({
   hostName: new URL(config.app.url).hostname,
   hostScheme: config.app.isProduction ? 'https' : 'http',
   apiVersion: ApiVersion.October24,
-  isEmbeddedApp: true,
+  isEmbeddedApp: false,
   logger: {
     level: config.app.isDevelopment ? 0 : 2, // Debug in dev, Error in prod
     log: async (severity, message) => {
