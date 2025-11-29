@@ -23,7 +23,7 @@ router.get('/auth', async (req: Request, res: Response): Promise<any> => {
       return res.status(400).json({ error: 'Invalid shop domain' });
     }
 
-    const authUrl = await shopify.auth.begin({
+    await shopify.auth.begin({
       shop: shopify.utils.sanitizeShop(shop, true)!,
       callbackPath: '/api/auth/callback',
       isOnline: false, // Offline access for background tasks
@@ -32,8 +32,6 @@ router.get('/auth', async (req: Request, res: Response): Promise<any> => {
     });
 
     logger.info('OAuth flow started', { shop });
-
-    return res.redirect(authUrl);
   } catch (error) {
     logger.error('OAuth start failed', {
       error: error instanceof Error ? error.message : 'Unknown error',
