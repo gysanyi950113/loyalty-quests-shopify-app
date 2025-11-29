@@ -8,7 +8,7 @@ export const shopify = shopifyApi({
   apiKey: config.shopify.apiKey,
   apiSecretKey: config.shopify.apiSecret,
   scopes: config.shopify.scopes,
-  hostName: config.app.host,
+  hostName: new URL(config.app.url).hostname,
   hostScheme: config.app.isProduction ? 'https' : 'http',
   apiVersion: ApiVersion.October24,
   isEmbeddedApp: true,
