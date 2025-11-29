@@ -30,7 +30,20 @@ export function verifyAppProxySignature(req: Request): boolean {
     .update(sortedParams)
     .digest('hex');
 
-  return calculatedSignature === signature;
+  // Use timing-safe comparison to prevent timing attacks
+  try {
+    const sigBuffer = Buffer.from(signature, 'hex');
+    const calcBuffer = Buffer.from(calculatedSignature, 'hex');
+
+    if (sigBuffer.length !== calcBuffer.length) {
+      return false;
+    }
+
+    return crypto.timingSafeEqual(sigBuffer, calcBuffer);
+  } catch (error) {
+    // Invalid hex string or buffer creation failed
+    return false;
+  }
 }
 
 /**

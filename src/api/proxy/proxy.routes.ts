@@ -37,8 +37,8 @@ async function verifyAndExtractProxyData(
 
     // Get shop from database
     const shop = await shopService.getShopByDomain(shopDomain);
-    if (!shop) {
-      return res.status(404).send('Shop not found');
+    if (!shop || shop.status !== 'ACTIVE') {
+      return res.status(404).send('Shop not found or inactive');
     }
 
     // Attach to request
@@ -113,6 +113,12 @@ router.get('/quests/:id', verifyAndExtractProxyData, async (req: Request, res: R
       return res.sendFile(
         path.join(__dirname, '../../views/proxy/login-required.html')
       );
+    }
+
+    // Validate UUID format
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!id || !uuidRegex.test(id)) {
+      return res.status(400).send('Invalid quest ID format');
     }
 
     const quest = await customerQuestService.getCustomerQuest(shopId, id, customerId);

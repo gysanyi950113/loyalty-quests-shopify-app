@@ -57,10 +57,12 @@ export class CustomerQuestService {
             currentValue: progress.currentValue,
             targetValue: progress.targetValue,
             completedAt: progress.completedAt,
-            percentComplete: Math.min(
-              Math.round((progress.currentValue / progress.targetValue) * 100),
-              100
-            ),
+            percentComplete: progress.targetValue > 0
+              ? Math.min(
+                  Math.round((progress.currentValue / progress.targetValue) * 100),
+                  100
+                )
+              : 0,
           } : {
             status: QuestProgressStatus.NOT_STARTED,
             currentValue: 0,
@@ -121,10 +123,12 @@ export class CustomerQuestService {
           currentValue: progress.currentValue,
           targetValue: progress.targetValue,
           completedAt: progress.completedAt,
-          percentComplete: Math.min(
-            Math.round((progress.currentValue / progress.targetValue) * 100),
-            100
-          ),
+          percentComplete: progress.targetValue > 0
+            ? Math.min(
+                Math.round((progress.currentValue / progress.targetValue) * 100),
+                100
+              )
+            : 0,
         } : {
           status: QuestProgressStatus.NOT_STARTED,
           currentValue: 0,
