@@ -7,8 +7,17 @@ Complete guide to integrate your Loyalty Quests app with Shopify.
 - [ ] Configure Shopify Partners Dashboard
 - [ ] Install app on development store
 - [ ] Register webhooks
+- [ ] Configure App Proxy for customer portal
 - [ ] Test quest creation and order tracking
 - [ ] Configure production billing (optional)
+
+---
+
+## 📖 Documentation
+
+- **[Customer Portal Guide](docs/CUSTOMER_PORTAL.md)** - Customer-facing quest portal setup and customization
+- **[Webhook Integration](docs/WEBHOOKS.md)** - Webhook handling and processing (future)
+- **[Theme Extension](docs/THEME_EXTENSION.md)** - Theme app extension widget (future)
 
 ---
 
@@ -21,6 +30,8 @@ Complete guide to integrate your Loyalty Quests app with Shopify.
 ---
 
 ## 🔧 Step 1: Configure Shopify Partners Dashboard
+
+### App Setup
 
 1. **Go to Shopify Partners**
    - Visit: https://partners.shopify.com/
@@ -53,6 +64,23 @@ Complete guide to integrate your Loyalty Quests app with Shopify.
    read_price_rules
    write_price_rules
    ```
+
+### App Proxy Setup (For Customer Portal)
+
+5. **Configure App Proxy**
+
+   In **Configuration** → **App proxy**:
+
+   | Setting | Value |
+   |---------|-------|
+   | **Subpath prefix** | `apps` |
+   | **Subpath** | `quests` |
+   | **Proxy URL** | `https://loyalty-quests-shopify-app-production.up.railway.app/api/proxy` |
+
+   This allows customers to access their quests at:
+   `https://your-store.myshopify.com/apps/quests`
+
+   📖 See **[Customer Portal Guide](docs/CUSTOMER_PORTAL.md)** for detailed setup and customization.
 
 ---
 
@@ -294,10 +322,21 @@ https://loyalty-quests-shopify-app-production.up.railway.app
 
 ### Available Endpoints
 
+**Public Endpoints:**
 - `GET /health` - Health check
 - `GET /` - API info
+
+**Authentication:**
+- `GET /api/auth` - Start OAuth flow
 - `POST /api/auth/callback` - OAuth callback
-- `POST /api/webhooks/*` - Webhook handlers
+
+**Webhooks:**
+- `POST /api/webhooks/app/uninstalled` - App uninstall handler
+- `POST /api/webhooks/orders/create` - Order created
+- `POST /api/webhooks/orders/paid` - Order paid
+- `POST /api/webhooks/orders/updated` - Order updated
+
+**Merchant Admin API:**
 - `POST /api/quests` - Create quest
 - `GET /api/quests` - List quests
 - `GET /api/quests/:id` - Get quest details
@@ -305,6 +344,16 @@ https://loyalty-quests-shopify-app-production.up.railway.app
 - `DELETE /api/quests/:id` - Delete quest
 - `GET /api/rewards` - List rewards
 - `POST /api/rewards/issue` - Issue reward
+- `GET /api/analytics` - Get analytics data
+
+**Customer Portal (App Proxy):**
+- `GET /api/proxy/quests` - Main quest listing page
+- `GET /api/proxy/quests/:id` - Quest detail page
+- `GET /api/proxy/api/quests` - JSON API for quests
+- `GET /api/proxy/api/rewards` - JSON API for rewards
+- `GET /api/proxy/api/stats` - JSON API for stats
+
+📖 See **[Customer Portal Guide](docs/CUSTOMER_PORTAL.md)** for customer-facing endpoints.
 
 ---
 
@@ -313,8 +362,11 @@ https://loyalty-quests-shopify-app-production.up.railway.app
 - ✅ All webhooks verify HMAC signatures
 - ✅ OAuth flow validates shop domains
 - ✅ API endpoints check shop authentication
+- ✅ App Proxy requests verify HMAC signatures (prevents customer ID spoofing)
 - ✅ Database credentials secured in Railway
 - ✅ Redis password authentication enabled
+
+📖 See **[Customer Portal Guide](docs/CUSTOMER_PORTAL.md#security-considerations)** for App Proxy security details.
 
 ---
 
